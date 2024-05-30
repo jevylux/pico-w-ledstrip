@@ -9,7 +9,7 @@ import random
 # create wifi connection 
 def connect_to_internet(ssid, password):
     wlan = network.WLAN(network.STA_IF)
-    #wlan.activate(True)
+    wlan.active(True)
     wlan.connect(ssid, password)
 
     max_wait = 10
@@ -22,7 +22,8 @@ def connect_to_internet(ssid, password):
     if wlan.status() != 3:
         raise RuntimeError("network connection failed")
     else:
-        print("Connected")
+        ip=wlan.ifconfig()[0]
+        print('IP: ', ip)
         status = wlan.ifconfig()
 
 def set_pwm_rgb(pwm_color, pwm_value):
